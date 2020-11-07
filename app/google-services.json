@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "828229055680",
+    "firebase_url": "https://nofaties.firebaseio.com",
+    "project_id": "nofaties",
+    "storage_bucket": "nofaties.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828229055680:android:06b6363c79a405bfdce925",
+        "android_client_info": {
+          "package_name": "com.example.nofaties"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828229055680-braj3o8m7dg1vvf0a1e4u70k1ru58e0b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4MWHrMVGi2f1aPb9Ruo0fIGT9qv7F-vY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828229055680-braj3o8m7dg1vvf0a1e4u70k1ru58e0b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

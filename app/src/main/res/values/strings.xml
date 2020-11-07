@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">NoFatties</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="usuario">Email</string>
+    <string name="registrarse">CREAR CUENTA</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lastname">Apellido</string>
+    <string name="name">Nombre</string>
+</resources>
