@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.example.nofaties.MainActivity
 import com.example.nofaties.R
 import com.example.nofaties.services.FirebaseAuthService
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -22,18 +24,32 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         fbs = FirebaseAuthService()
-        txtUser = findViewById(R.id.txt_username)
+        txtUser = findViewById(R.id.txt_username_signup)
         txtPassword = findViewById(R.id.txt_password)
         txtLast = findViewById(R.id.txt_lastname)
         txtName = findViewById(R.id.txt_name)
 
-        findViewById<Button>(R.id.btn_signup).setOnClickListener {
-            val isSuccessful = fbs.signUp( txtUser.text.toString(), txtPassword.text.toString(),
-                    txtName.text.toString(), txtLast.text.toString(), this )
+        findViewById<Button>(R.id.btn_signup_login).setOnClickListener {
+            var name= txtName.text.toString()
+            var lastname = txtLast.text.toString()
+            val result = fbs.signUp( txtUser.text.toString(), txtPassword.text.toString(), name, lastname)
 
-            if (isSuccessful) {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+            result.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+
+                    Toast.makeText(baseContext, "Exito.",
+                            Toast.LENGTH_SHORT).show()
+                    val user = FirebaseAuthService.currentUser
+
+                    user?.updateProfile(userProfileChangeRequest {
+                        displayName = "$name $lastname"
+                    })
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(baseContext, "Denegado.",
+                            Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
