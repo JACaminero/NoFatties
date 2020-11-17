@@ -11,14 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:minHeight="430dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_bottom_dock" />
+        android:minHeight="400dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <EditText
         android:id="@+id/et_restante"
         android:layout_width="85dp"
+        android:enabled="false"
         android:layout_height="56dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
@@ -30,6 +29,7 @@
         android:id="@+id/et_original"
         android:layout_width="85dp"
         android:layout_height="56dp"
+        android:enabled="false"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -41,6 +41,7 @@
         android:layout_width="85dp"
         android:layout_height="56dp"
         android:layout_marginTop="8dp"
+        android:enabled="false"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,6 +98,7 @@
         android:layout_width="85dp"
         android:layout_height="56dp"
         android:layout_marginTop="8dp"
+        android:enabled="false"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,6 +119,7 @@
         android:layout_width="85dp"
         android:layout_height="56dp"
         android:layout_marginEnd="8dp"
+        android:enabled="false"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintBaseline_toBaselineOf="@+id/et_bottom_dock"
@@ -137,6 +140,7 @@
         android:layout_height="56dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:enabled="false"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintBaseline_toBaselineOf="@+id/et_bottom_dock"
@@ -152,5 +156,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_objetivo" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Fecha"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Peso"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

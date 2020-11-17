@@ -3,10 +3,7 @@ package com.example.nofaties
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -14,7 +11,6 @@ import android.widget.Toast
 import com.example.nofaties.models.Goal
 import com.example.nofaties.services.FireStoreGoalService
 import com.example.nofaties.services.FirebaseAuthService
-import java.time.LocalDate
 import java.util.*
 
 class GoalRegistry : AppCompatActivity() {
@@ -32,6 +28,7 @@ class GoalRegistry : AppCompatActivity() {
         val pesoActual = findViewById<EditText>(R.id.txt_peso_actual)
 
         findViewById<Button>(R.id.btn_register_goal)?.setOnClickListener {
+
             FireStoreGoalService().insert(
                 Goal( Calendar.getInstance().time,  pesoActual?.text.toString().toFloat(),
                     goal?.text.toString().toFloat(), null,
@@ -41,6 +38,7 @@ class GoalRegistry : AppCompatActivity() {
                         successCallback()
                     }
                 }
+
         }
     }
 

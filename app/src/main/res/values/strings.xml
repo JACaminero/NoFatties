@@ -8,4 +8,7 @@
     <string name="name">Nombre</string>
     <string name="este_mes">Este Mes</string>
     <string name="esta_semana">Esta Semana</string>
+    <string name="btn_date_picker">Fecha</string>
+    <string name="btn_save">Guardar</string>
+    <string name="txt_fecha">__-__-____</string>
 </resources>
