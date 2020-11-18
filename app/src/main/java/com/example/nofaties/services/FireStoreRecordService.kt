@@ -5,6 +5,7 @@ import com.example.nofaties.models.Record
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -25,11 +26,22 @@ class FireStoreRecordService: IFireStoreService<Record> {
         return db.collection("records").add(item)
     }
 
+    fun getTotal(): Task<QuerySnapshot> {
+        return db.collection("records")
+            .get()
+    }
     fun getWeeklyProgress(): Task<QuerySnapshot> {
         return db.collection("records").orderBy("recordDate")
             .whereLessThanOrEqualTo("recordDate", Timestamp.now())
                 .endAt(Timestamp( Date.from( LocalDateTime.now().minusDays(7).atZone(ZoneId.systemDefault()).toInstant() )))
             .get()
+    }
+
+    fun getMonthlyProgress(): Task<QuerySnapshot> {
+        return db.collection("records").orderBy("recordDate")
+                .whereLessThanOrEqualTo("recordDate", Timestamp.now())
+                .endAt(Timestamp( Date.from( LocalDateTime.now().minusMonths(1).atZone(ZoneId.systemDefault()).toInstant() )))
+                .get()
     }
 
     override fun delete(item: Record) {
@@ -41,10 +53,18 @@ class FireStoreRecordService: IFireStoreService<Record> {
     }
 
     fun getGoalRecords(goalId: String?): Task<QuerySnapshot> {
-
-        return db.collection("records").whereEqualTo("userId", FirebaseAuthService.currentUser?.uid).get()
+        return db.collection("records").orderBy("recordDate")
+                .whereLessThanOrEqualTo("recordDate", Timestamp.now())
+                .endAt(Timestamp( Date.from( LocalDateTime.now().minusMonths(1).atZone(ZoneId.systemDefault()).toInstant() )))
+                .get()
     }
 
+    fun restante(): Task<QuerySnapshot> {
+        return db.collection("records")
+            .orderBy("recordDate", Query.Direction.ASCENDING)
+            .limitToLast(1)
+            .get()
+    }
     override fun getAll(): Task<QuerySnapshot> {
         return db.collection("records")
             .whereEqualTo("goalId", FirebaseAuthService.currentUser?.uid)

@@ -60,9 +60,11 @@ class MainActivity : AppCompatActivity() {
         var originalWeight: Float = 0f
         var actualWeightSum: Float = 0f
         var goalWeight: Float = 0f
-        var actualWeight: Float = 0f
+        var monthProgress: Float = 0f
         var restante: Float = 0f
         var weekProgress: Float = 0f
+        var progressDay: Float = 0f
+
         FireStoreGoalService().getOriginalWeight()
             .addOnCompleteListener {
             if (it.isSuccessful) {
@@ -75,6 +77,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        FireStoreRecordService().getMonthlyProgress()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    for (doc in it.result?.documents!!) {
+                        var progress = originalWeight - doc.data?.get("recordWeight").toString().toFloat()
+                        monthProgress += progress
+                    }
+                    findViewById<EditText>(R.id.et_bottom_dock).setText(monthProgress.toString())
+                }
+            }
+
         FireStoreRecordService().getWeeklyProgress()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -86,15 +99,25 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
-        FireStoreGoalService().getActualWeight().addOnCompleteListener {
+        FireStoreRecordService().getTotal().addOnCompleteListener {
             if (it.isSuccessful) {
-//                for(doc in it.result!!) {
-//                    doc.data["recordDate"]
-//                }
-//                findViewById<EditText>(R.id.et_restante).setText(restante.toString())
+                for (doc in it.result?.documents!!) {
+                    progressDay += doc.data?.get("recordWeight").toString().toFloat()
+                }
+                findViewById<EditText>(R.id.et_bottom_left).setText(progressDay.toString())
             }
         }
+
+        FireStoreRecordService().restante().addOnCompleteListener {
+            if (it.isSuccessful) {
+                for(doc in it.result!!) {
+                    restante = doc.data["recordWeight"].toString().toFloat()
+                }
+            }
+            findViewById<EditText>(R.id.et_restante).setText(restante.toString())
+        }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
        val inflater: MenuInflater = menuInflater
