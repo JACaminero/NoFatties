@@ -1,6 +1,7 @@
 package com.example.nofaties
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -49,6 +50,7 @@ class RecordRegistry : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             if (task.isSuccessful) {
                 Toast.makeText(baseContext, "Exito!!!.",
                     Toast.LENGTH_SHORT).show()
+                startActivity( Intent(this, MainActivity::class.java) )
             } else {
 
             }

@@ -29,20 +29,14 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private var records: MutableList<RecordShow> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val recView = findViewById<RecyclerView>(R.id.recyclerView2)
-        recView.addItemDecoration(
-            DividerItemDecoration( recView.context, DividerItemDecoration.VERTICAL ))
-
-        val layoutManager = LinearLayoutManager(this)
-        recView.layoutManager = layoutManager
-
         FireStoreRecordService().getAll()
             .addOnSuccessListener { snapshot ->
-                for(doc in snapshot){
+                for(doc in snapshot) {
                     var map = doc.data
                     var weight = map.get("recordWeight").toString()
                     var date = map.get("recordDate") as Timestamp
@@ -50,15 +44,20 @@ class MainActivity : AppCompatActivity() {
                     records?.add( RecordShow( dateFormated, weight ) )
                 }
                 loadUserData()
-                val adapter = RecordRecyclerAdapter(records)
-                recView.adapter = adapter
             }
-
     }
 
     private fun loadUserData() {
+        val recView = findViewById<RecyclerView>(R.id.recyclerView2)
+        recView.addItemDecoration(
+                DividerItemDecoration( recView.context, DividerItemDecoration.VERTICAL ))
+        val layoutManager = LinearLayoutManager(this)
+        recView.layoutManager = layoutManager
+
+        val adapter = RecordRecyclerAdapter(records)
+        recView.adapter = adapter
+
         var originalWeight: Float = 0f
-        var actualWeightSum: Float = 0f
         var goalWeight: Float = 0f
         var monthProgress: Float = 0f
         var restante: Float = 0f
